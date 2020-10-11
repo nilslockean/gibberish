@@ -1,15 +1,16 @@
-function onOpen() {
-}
-function openDialog() {
-}
-function getSheetsData() {
-}
-function addSheet() {
-}
-function deleteSheet() {
-}
-function setActiveSheet() {
-}!function(e, a) {
+function onOpen() {}
+
+function openDialog() {}
+
+function getSheetsData() {}
+
+function addSheet() {}
+
+function deleteSheet() {}
+
+function setActiveSheet() {}
+
+!function(e, a) {
     for (var i in a) e[i] = a[i];
 }(this, /******/ function(modules) {
     // webpackBootstrap
@@ -119,48 +120,52 @@ function setActiveSheet() {
 /* 0 */
 /***/ function(module, __webpack_exports__, __webpack_require__) {
     "use strict";
-    /* harmony export (binding) */    __webpack_require__.d(__webpack_exports__, "d", function() {
+    /* harmony export (binding) */    __webpack_require__.d(__webpack_exports__, "d", (function() {
         return onOpen;
-    }), 
-    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() {
+    })), 
+    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", (function() {
         return openDialog;
-    }), 
-    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() {
+    })), 
+    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", (function() {
         return getSheetsData;
-    }), 
-    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() {
+    })), 
+    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", (function() {
         return addSheet;
-    }), 
-    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() {
+    })), 
+    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", (function() {
         return deleteSheet;
-    }), 
-    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() {
+    })), 
+    /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", (function() {
         return setActiveSheet;
-    });
+    }));
     var onOpen = function() {
-        SpreadsheetApp.getUi().createMenu("Custom scripts").addItem("Edit sheets [sample React project]", "openDialog").addToUi();
+        DocumentApp.getUi().createMenu("Custom scripts").addItem("Edit sheets [sample React project]", "openDialog").addToUi();
     }, openDialog = function() {
         var html = HtmlService.createHtmlOutputFromFile("dialog").setWidth(400).setHeight(600);
-        SpreadsheetApp.getUi().showModalDialog(html, "Sheet Editor");
+        DocumentApp.getUi().showModalDialog(html, "Sheet Editor");
+    }, getActiveSheetName = function() {
+        return DocumentApp.getActiveDocument().getName();
     }, getSheets = function() {
-        return SpreadsheetApp.getActive().getSheets();
+        return [ {
+            getName: getActiveSheetName
+        } ];
     }, getSheetsData = function() {
-        var activeSheetName = SpreadsheetApp.getActive().getSheetName();
-        return getSheets().map(function(sheet, index) {
+        var activeSheetName = getActiveSheetName();
+        return getSheets().map((function(sheet, index) {
             var sheetName = sheet.getName();
             return {
                 text: sheetName,
                 sheetIndex: index,
                 isActive: sheetName === activeSheetName
             };
-        });
+        }));
     }, addSheet = function(sheetTitle) {
-        return SpreadsheetApp.getActive().insertSheet(sheetTitle), getSheetsData();
+        return DocumentApp.getActiveDocument().getCursor().insertText(sheetTitle), getSheetsData();
     }, deleteSheet = function(sheetIndex) {
-        var sheets = getSheets();
-        return SpreadsheetApp.getActive().deleteSheet(sheets[sheetIndex]), getSheetsData();
+        getSheets();
+        return DocumentApp.getUi().alert(sheetIndex), getSheetsData();
     }, setActiveSheet = function(sheetName) {
-        return SpreadsheetApp.getActive().getSheetByName(sheetName).activate(), getSheetsData();
+        return DocumentApp.getUi().alert(sheetName), getSheetsData();
     };
 }, 
 /* 1 */

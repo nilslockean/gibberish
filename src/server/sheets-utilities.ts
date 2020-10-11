@@ -1,6 +1,6 @@
 // Use ES6/7 code
 const onOpen = () => {
-	SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+	DocumentApp.getUi() // Or DocumentApp or FormApp.
 		.createMenu("Custom scripts")
 		.addItem("Edit sheets [sample React project]", "openDialog")
 		.addToUi();
@@ -10,18 +10,28 @@ const openDialog = () => {
 	const html = HtmlService.createHtmlOutputFromFile("dialog")
 		.setWidth(400)
 		.setHeight(600);
-	SpreadsheetApp
+		DocumentApp
 		.getUi() // Or DocumentApp or FormApp.
 		.showModalDialog(html, "Sheet Editor");
 };
 
-const getSheets = () => SpreadsheetApp
-	.getActive()
-	.getSheets();
 
-const getActiveSheetName = () => SpreadsheetApp
-	.getActive()
-	.getSheetName();
+const getActiveSheetName = () => DocumentApp
+	.getActiveDocument()
+	.getName()
+
+// SpreadsheetApp
+// 	.getActive()
+// 	.getSheetName();
+
+const getSheets = () => [{
+	getName: getActiveSheetName
+}]
+
+// SpreadsheetApp
+// 	.getActive()
+// 	.getSheets();
+
 
 const getSheetsData = () => {
 	const activeSheetName = getActiveSheetName();
@@ -36,25 +46,40 @@ const getSheetsData = () => {
 };
 
 const addSheet = (sheetTitle) => {
-	SpreadsheetApp
-		.getActive()
-		.insertSheet(sheetTitle);
+	// SpreadsheetApp
+	// 	.getActive()
+	// 	.insertSheet(sheetTitle);
+
+	DocumentApp
+		.getActiveDocument()
+		.getCursor()
+		.insertText(sheetTitle)
 	return getSheetsData();
 };
 
 const deleteSheet = (sheetIndex) => {
 	const sheets = getSheets();
-	SpreadsheetApp
-		.getActive()
-		.deleteSheet(sheets[sheetIndex]);
+	// SpreadsheetApp
+	// 	.getActive()
+	// 	.deleteSheet(sheets[sheetIndex]);
+
+	DocumentApp
+		.getUi()
+		.alert(sheetIndex)
+
 	return getSheetsData();
 };
 
 const setActiveSheet = (sheetName) => {
-	SpreadsheetApp
-		.getActive()
-		.getSheetByName(sheetName)
-		.activate();
+	// SpreadsheetApp
+	// 	.getActive()
+	// 	.getSheetByName(sheetName)
+	// 	.activate();
+
+	DocumentApp
+		.getUi()
+		.alert(sheetName)
+
 	return getSheetsData();
 };
 
