@@ -1,0 +1,21 @@
+{
+  "primary_menu_item": "Starta",
+  "quick_insert_menu_item": "Snabbinfoga",
+  "generate_header": "Skapa platshållartext",
+  "p_len_header": "Genomsnittlig längd på paragraf",
+  "p_len_short": "Kort",
+  "p_len_medium": "Mellan",
+  "p_len_long": "Lång",
+  "p_len_v_long": "Jättelång",
+  "num_p_header": "Antal paragrafer",
+  "generate_btn_text": "Generera",
+  "generate_btn_text_loading": "Genererar...",
+  "generated_text_header": "Din platshållartext",
+  "copy_btn_text": "Kopiera till urklipp",
+  "copy_btn_text_loading": "Kopierar...",
+  "insert_btn_text": "Infoga",
+  "insert_btn_text_loading": "Infogar...",
+  "copied_notice": "Kopierat till urkipp!",
+  "error_no_insert": "Det går inte att infoga text där.",
+  "error_no_caret": "Hittade ingen insättningspunkt."
+}

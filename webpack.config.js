@@ -14,8 +14,8 @@ const isDev = process.env.NODE_ENV !== "production";
 
 // Bundle Dialog Template HTML
 const htmlPlugin = new HtmlWebpackPlugin({
-	template: "./src/client/dialog-template.html",
-	filename: "dialog.html",
+	template: "./src/client/sidebar-template.html",
+	filename: "sidebar.html",
 	inlineSource: ".(js|css)$" // embed all javascript and css inline
 });
 

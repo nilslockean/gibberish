@@ -1,0 +1,21 @@
+{
+  "primary_menu_item": "Start",
+  "quick_insert_menu_item": "Quick Insert",
+  "generate_header": "Create Dummy Text",
+  "p_len_header": "Average Paragraph Length",
+  "p_len_short": "Short",
+  "p_len_medium": "Medium",
+  "p_len_long": "Long",
+  "p_len_v_long": "Very Long",
+  "num_p_header": "Number of Paragraphs",
+  "generate_btn_text": "Create",
+  "generated_text_header": "Dummy Text",
+  "copy_btn_text": "Copy to Clipboard",
+  "insert_btn_text": "Insert",
+  "copied_notice": "Copied to clipboard!",
+  "generate_btn_text_loading": "Creating...",
+  "copy_btn_text_loading": "Copying...",
+  "insert_btn_text_loading": "Inserting...",
+  "error_no_insert": "Cannot insert text here.",
+  "error_no_caret": "Cannot find a cursor."
+}

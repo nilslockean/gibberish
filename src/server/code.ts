@@ -1,20 +1,19 @@
-import * as publicFunctions from "./sheets-utilities";
+import * as publicFunctions from "./docs-utilities"
 
 
 // Expose public functions
-
 // @ts-ignore
-global.onOpen = publicFunctions.onOpen;
+global.onOpen = publicFunctions.onOpen
 // @ts-ignore
-global.openDialog = publicFunctions.openDialog;
+global.openSidebar = publicFunctions.openSidebar
 // @ts-ignore
-global.getSheetsData = publicFunctions.getSheetsData;
+global.quickInsert = publicFunctions.quickInsert
 // @ts-ignore
-global.addSheet = publicFunctions.addSheet;
+global.generateLoremIpsum = publicFunctions.generateLoremIpsum
 // @ts-ignore
-global.deleteSheet = publicFunctions.deleteSheet;
+global.getLanguage = publicFunctions.getLanguage
 // @ts-ignore
-global.setActiveSheet = publicFunctions.setActiveSheet;
+global.insertAtCaret = publicFunctions.insertAtCaret
 
 // Maybe someday....
 // https://github.com/Microsoft/TypeScript/issues/19573#issuecomment-447889066

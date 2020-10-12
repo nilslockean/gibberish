@@ -1,94 +1,139 @@
-@import url('https://fonts.googleapis.com/css?family=Lora|Mukta');
+@import url("https://ssl.gstatic.com/docs/script/css/add-ons1.css");
 
-$theme-red: #f44336;
-
-
-input {
-  width: 130px;
-  margin-left: 8px;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.secondary,
+.small,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select[multiple],
+select[size],
+textarea,
+.button,
+button,
+input[type="button"],
+input[type="image"],
+input[type="reset"],
+input[type="submit"],
+select {
+  font-family: "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, Arial, sans-serif;
 }
 
-button {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  background-color: $theme-red;
-  border: 1px solid $theme-red;
-  color: white;
-  display: inline-block;
-  font-family: 'Mukta', sans-serif;
-  font-size: 11px;
-  height: 20px;
-  line-height: 15px;
-  margin-left: 3px;
-  margin-right: 11px;
-  padding: 3px;
-  text-transform: uppercase;
-  transition-duration: 0.6s;
-  vertical-align: middle;
-  width: 20px;
+body {
+  background: #ffffff;
 }
 
-button:hover {
-  background-color: white;
-  color: black;
+.container {
+  padding: 0 1em;
+  box-sizing: border-box;
+  display: block;
 }
 
-button:active {
-  background-color: #fafafa;
-  transform: translateY(1px);
-  transition-duration: 0.3s;
+.form-group {
+  margin-bottom: 1em;
+
+  label {
+    font-weight: bold;
+  }
+  
+  textarea {
+    width: 100%;
+    max-height: 300px;
+  }
+
+  label + input,
+  label + select,
+  label + textarea {
+    margin-bottom: .5em;
+  }
 }
 
-button:focus {
-  outline: none;
+input[type="number"].inline {
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  font-size: 1em;
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+}
+select.inline {
+  font-size: 1em;
+  border: none;
+  padding: 0;
+  height: auto;
+  background: transparent;
+  font-size: 1em;
 }
 
-.formBlock {
-  display: -webkit-box;
-  font-family: 'Lora', serif;
-  font-weight: 700;
+.message {
+  padding: .5em;
+  background: #eee;
+  border: 1px solid #ddd;
+  color: #222;
+  margin-bottom: 1em;
+  overflow: hidden;
+  border-radius: 2px;
+  
+  &.card {
+    border-width: 0;
+    background: #fff;
+    // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    &:hover {
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+  }
+
+  &.basic {
+    background: transparent;
+    border-color: #eee;
+  }
+  &.error {
+    background: #fee;
+    border-color: #faa;
+    color: #c00;
+  }
 }
 
-.sheetLine {
-  cursor: pointer;
-  line-height: 3;
-  height: 30px;
-}
+@supports (display: grid) {
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* This is better for small screens, once min() is better supported */
+    /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+    grid-gap: 1em;
+    /* This is the standardized property now, but has slightly less support */
+    /* gap: 1rem */
+    
+    &.two {
+      grid-template-columns: 1fr 1fr;
+    }
+    &.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
 
-.sheetNameText {
-  font-size: 14px;
-  font-family: 'Lora', serif;
-}
-
-.sheetNameText.active-sheet {
-  border-bottom: 3px solid #338236;
-}
-
-/*
-ReactCSSTransitionGroup styling
- */
-.sheetNames-enter {
-  opacity: 0.01;
-}
-
-.sheetNames-enter.sheetNames-enter-active {
-  opacity: 1;
-  transition: opacity 800ms ease-in;
-}
-
-.sheetNames-leave {
-  opacity: 1;
-}
-
-.sheetNames-leave.sheetNames-leave-active {
-  opacity: 0.01;
-  transition: opacity 100ms ease-in;
-}
-
-.sheetNames-appear {
-  opacity: 0.01;
-}
-
-.sheetNames-appear.sheetNames-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+    // &.two .column {
+    //   float: left;
+    //   width: 50%;
+    // }
+  }
 }
