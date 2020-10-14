@@ -23,7 +23,9 @@
   ],
   "author": "Danny Hinshaw",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@material-ui/core": "^4.11.0"
+  },
   "devDependencies": {
     "@google/clasp": "^1.7.0",
     "@types/google-apps-script": "0.0.28",

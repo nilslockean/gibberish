@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import Button from '@material-ui/core/Button'
 import { Language } from '../../_locales/i18n'
 import Generator from "./Generator"
 
@@ -40,6 +41,9 @@ export default class Main extends React.Component<Props, State> {
 
     return <div className="container">
       { !lang ? <p>...</p> : <Generator lang={lang} /> }
+      <Button variant="contained" color="primary">
+        Hello World
+      </Button>
     </div>
   }
 }
