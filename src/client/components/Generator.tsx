@@ -1,5 +1,6 @@
 import React, { RefObject } from "react";
 import i18n, { Language } from '../../_locales/i18n'
+import { storage } from "./Main"
 
 enum ParagraphLength {
   SHORT = "short",
@@ -47,17 +48,17 @@ export default class Main extends React.Component<Props, State> {
   i18n = (messageName: string) => i18n(this.props.lang, messageName)
   
   componentDidMount = () => {
-    const paragraphLength = localStorage.getItem("paragraphLength") as ParagraphLength | null
+    const paragraphLength = storage.get("paragraphLength") as ParagraphLength | undefined
     if ( !!paragraphLength ) this.setState({ paragraphLength })
 
-    const numParagraphs = localStorage.getItem("numParagraphs") as string | null
-    if ( numParagraphs !== null) this.setState({ numParagraphs: Number(numParagraphs) })
+    const numParagraphs = storage.get("numParagraphs")
+    if ( numParagraphs !== undefined ) this.setState({ numParagraphs: Number(numParagraphs) })
 
-    console.log("stored", paragraphLength, numParagraphs)
+    // console.log("stored", paragraphLength, numParagraphs)
   }
 
   handleError = (error: any) => {
-    console.log("Error!", typeof error, JSON.stringify(error, null, 2), error.message)
+    // console.log("Error!", typeof error, JSON.stringify(error, null, 2), error.message)
 
     const defaultText = "Something went wrong, please try again."
     let lastError
@@ -81,14 +82,14 @@ export default class Main extends React.Component<Props, State> {
     const paragraphLength = event.currentTarget.value as ParagraphLength
     
     this.setState({ paragraphLength })
-    localStorage.setItem("paragraphLength", paragraphLength)
+    storage.set("paragraphLength", paragraphLength)
   }
 
   handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     const numParagraphs = Number(event.currentTarget.value)
 
     this.setState({ numParagraphs })
-    localStorage.setItem("numParagraphs", numParagraphs.toString())
+    storage.set("numParagraphs", numParagraphs.toString())
   }
 
   handleGenerateClick = () => {

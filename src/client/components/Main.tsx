@@ -2,6 +2,26 @@ import React from "react";
 import { Language } from '../../_locales/i18n'
 import Generator from "./Generator"
 
+const storage = {
+  get: (key: string): string | undefined => {
+    let value: string | undefined
+    try {
+      value = localStorage.getItem(key) || undefined
+    } catch(_error) {
+      value = undefined
+    } finally {
+      return value
+    }
+  },
+  set: (key: string, value: string) => {
+    try {
+      localStorage.setItem(key, value)
+    } catch(_error) {
+      // Silence
+    }
+  }
+}
+
 interface Props {}
 
 interface State {
@@ -12,7 +32,7 @@ export default class Main extends React.Component<Props, State> {
   constructor(props) {
 		super(props);
 		this.state = {
-			lang: localStorage.getItem("lang") as Language || undefined
+			lang: storage.get("lang") as Language
 		}
   }
   
@@ -20,7 +40,7 @@ export default class Main extends React.Component<Props, State> {
     const onSuccess = (lang: Language) => {
       if ( this.state.lang !== lang ) {
         this.setState({ lang })
-        localStorage.setItem("lang", lang)
+        storage.set("lang", lang)
       }
     }
 
@@ -43,3 +63,5 @@ export default class Main extends React.Component<Props, State> {
     </div>
   }
 }
+
+export { storage }
