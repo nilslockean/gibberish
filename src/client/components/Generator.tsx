@@ -63,7 +63,10 @@ export default class Main extends React.Component<Props, State> {
     const defaultText = "Something went wrong, please try again."
     let lastError
     try {
-      const { message = defaultText } = error
+      let { message = defaultText } = error
+      message = message.replace(/^Error:\s/, "")
+      message = this.i18n(message)
+
       lastError = new Error(message)
     } catch(_error) {
       // Message doesn't exist on "error"

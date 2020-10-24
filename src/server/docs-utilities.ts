@@ -41,7 +41,7 @@ const onOpen = () => {
 
 const openSidebar = () => {
 	const html = HtmlService.createHtmlOutputFromFile("sidebar")
-		.setTitle("Lorem Ipsum Dummy Text")
+		.setTitle("Gibberish")
 
 	DocumentApp
 		.getUi()
@@ -52,7 +52,9 @@ const quickInsert = () => {
 	try {
 		insertAtCaret(quickParagraph)
 	} catch(error) {
-		alert(error.message)
+		const lang = getLanguage()
+		const message = i18n(lang, error.message)
+		alert(message)
 	}
 }
 
@@ -75,12 +77,10 @@ const insertAtCaret = (text = "") => {
 		// containing element doesn"t allow insertions, so show the user an error message.
 		const textElement = cursor.insertText(text)
 		if ( !textElement ) {
-			const lang = getLanguage()
-			throw new Error(i18n(lang, "error_no_insert"))
+			throw new Error("error_no_insert")
 		}
 	} else {
-		const lang = getLanguage()
-		throw new Error(i18n(lang, "error_no_caret"))
+		throw new Error("error_no_caret")
 	}
 }
 

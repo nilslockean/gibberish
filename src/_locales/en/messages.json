@@ -17,5 +17,5 @@
   "copy_btn_text_loading": "Copying...",
   "insert_btn_text_loading": "Inserting...",
   "error_no_insert": "Cannot insert text here.",
-  "error_no_caret": "Cannot find a cursor."
+  "error_no_caret": "Couldn't find a cursor."
 }
