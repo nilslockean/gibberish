@@ -1,15 +1,32 @@
 import React, { RefObject } from "react";
 import i18n, { Language } from '../../_locales/i18n'
 import { storage } from "./Main"
+// import Typography from "@material-ui/core/Typography"
+import Alert from "@material-ui/lab/Alert"
+import MainSlider from "./MainSlider"
+import MainSelect from "./MainSelect"
+import LinearProgress from "@material-ui/core/LinearProgress"
+import Button from "@material-ui/core/Button"
+import GenerateButton from "./GenerateButton";
 
-enum ParagraphLength {
+export enum ParagraphLength {
   SHORT = "short",
   MEDIUM = "medium",
   LONG = "long",
   VERY_LONG = "verylong"
 }
 
-enum Status {
+export type ParagraphLengthOption = {
+  value: ParagraphLength
+  label: string
+}
+
+export type MuiSelectCallback = (event: React.ChangeEvent<{
+  name?: string | undefined;
+  value: unknown;
+}>, child: React.ReactNode) => void
+
+export enum Status {
   IDLE,
   GENERATING,
   COPYING,
@@ -95,6 +112,23 @@ export default class Main extends React.Component<Props, State> {
     storage.set("numParagraphs", numParagraphs.toString())
   }
 
+  handleSliderChange = (_event: React.ChangeEvent<{}>, value: number | number[]): void => {
+    if ( typeof value !== "number" ) return;
+
+    this.setState({ numParagraphs: value })
+    storage.set("numParagraphs", value.toString())
+  }
+
+  handleMainSelectChange: MuiSelectCallback = (event) => {
+    const { value } = event.target
+    if ( !value ) return;
+    
+    const paragraphLength = value as ParagraphLength
+
+    this.setState({ paragraphLength })
+    storage.set("paragraphLength", paragraphLength)
+  }
+
   handleGenerateClick = () => {
     this.setState({
       lastError: undefined,
@@ -178,49 +212,40 @@ export default class Main extends React.Component<Props, State> {
   render = () => {
     const { generatedText, paragraphLength, numParagraphs, lastError, status } = this.state
     const { i18n } = this
+
+    const paragraphLengthOptions: ParagraphLengthOption[] = [
+      { value: ParagraphLength.SHORT, label: i18n("p_len_short") },
+      { value: ParagraphLength.MEDIUM, label: i18n("p_len_medium") },
+      { value: ParagraphLength.LONG, label: i18n("p_len_long") },
+      { value: ParagraphLength.VERY_LONG, label: i18n("p_len_v_long") }
+    ]
+
     return <>
-      <h2>{ i18n("generate_header") }</h2>
-      
-      { !!lastError && <div className="error message">
+      { !!lastError && <Alert severity="error">
         { lastError.message }
-      </div> }
+      </Alert> }
       
-      <div className="message basic">
-        <div className="form-group">
-          <label htmlFor="num">{ i18n("num_p_header") }</label>
-          <input
-            type="number"
-            id="num"
-            min="1"
-            max="10"
-            onChange={ this.handleInputChange }
-            value={ numParagraphs }
-          ></input>
+      <MainSlider
+        label={ i18n("num_p_header") }
+        value={ numParagraphs }
+        onChange={ this.handleSliderChange }
+      />
 
-          <label htmlFor="select">{ i18n("p_len_header") }</label>
-          <select
-            id="select"
-            onChange={ this.handleSelectChange }
-            value={ paragraphLength }
-          >
-            <option value={ ParagraphLength.SHORT }>{ i18n("p_len_short") }</option>
-            <option value={ ParagraphLength.MEDIUM }>{ i18n("p_len_medium") }</option>
-            <option value={ ParagraphLength.LONG }>{ i18n("p_len_long") }</option>
-            <option value={ ParagraphLength.VERY_LONG }>{ i18n("p_len_v_long") }</option>
-          </select>
-        </div>
-        <button
-          onClick={ this.handleGenerateClick }
-          disabled={ status === Status.GENERATING }
-          style={{ float: "right" }}
-        >
-          { status === Status.GENERATING ?
-            i18n("generate_btn_text_loading") :
-            i18n("generate_btn_text")
-          }
-        </button>
-      </div>
+      <MainSelect
+        label={ i18n("p_len_header") }
+        options={ paragraphLengthOptions }
+        value={ paragraphLength }
+        onChange={ this.handleMainSelectChange }
+      />
 
+      <GenerateButton
+        status={ status }
+        onClick={ this.handleGenerateClick }
+        content={ i18n("generate_btn_text") }
+        generatingContent={ i18n("generate_btn_text_loading") }
+      />
+
+      { status === Status.GENERATING && <LinearProgress /> }
 
       <div className="form-group" style={{ display: generatedText.length ? 'block' : 'none' }}>
         <label htmlFor="sampleTextArea">
