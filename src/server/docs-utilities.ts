@@ -27,6 +27,8 @@ const getLanguage = (): Language => {
 	}
 }
 
+const onInstall = () => onOpen()
+
 const onOpen = () => {
 	const lang = getLanguage()
 	const primaryLabel = i18n(lang, "primary_menu_item")
@@ -85,6 +87,7 @@ const insertAtCaret = (text = "") => {
 }
 
 export {
+	onInstall,
 	onOpen,
 	openSidebar,
 	quickInsert,

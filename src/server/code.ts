@@ -3,6 +3,8 @@ import * as publicFunctions from "./docs-utilities"
 
 // Expose public functions
 // @ts-ignore
+global.onInstall = publicFunctions.onInstall
+// @ts-ignore
 global.onOpen = publicFunctions.onOpen
 // @ts-ignore
 global.openSidebar = publicFunctions.openSidebar
