@@ -6,8 +6,8 @@ import Alert from "@material-ui/lab/Alert"
 import MainSlider from "./MainSlider"
 import MainSelect from "./MainSelect"
 import LinearProgress from "@material-ui/core/LinearProgress"
-import Button from "@material-ui/core/Button"
-import GenerateButton from "./GenerateButton";
+import GenerateButton from "./GenerateButton"
+import MainTextArea from "./MainTextArea"
 
 export enum ParagraphLength {
   SHORT = "short",
@@ -235,6 +235,8 @@ export default class Main extends React.Component<Props, State> {
       />
 
       { status === Status.GENERATING && <LinearProgress /> }
+
+      <MainTextArea label={ i18n("generated_text_header") } value={ generatedText } />
 
       <div className="form-group" style={{ display: generatedText.length ? 'block' : 'none' }}>
         <label htmlFor="sampleTextArea">
