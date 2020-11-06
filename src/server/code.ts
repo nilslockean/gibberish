@@ -16,6 +16,8 @@ global.generateLoremIpsum = publicFunctions.generateLoremIpsum
 global.getLanguage = publicFunctions.getLanguage
 // @ts-ignore
 global.insertAtCaret = publicFunctions.insertAtCaret
+// @ts-ignore
+global.highlightText = publicFunctions.highlightText
 
 // Maybe someday....
 // https://github.com/Microsoft/TypeScript/issues/19573#issuecomment-447889066

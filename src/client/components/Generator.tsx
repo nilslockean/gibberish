@@ -123,15 +123,26 @@ export default class Main extends React.Component<Props, State> {
     
     this.setState({ status: Status.INSERTING, lastError: undefined })
 
-    const onSuccess = () => {
+    const onSuccess = (_result) => {
       this.setState({ status: Status.IDLE })
+
+      /* TODO: Reset highlight
+      console.log(JSON.stringify(_result, null, 2))
+      setTimeout(() => {
+        // @ts-ignore
+        google.script.run
+          //.withSuccessHandler(console.log)
+          //.withFailureHandler(({ message }) => console.warn(message))
+          //.highlightText(textElement, backgroundColor)
+      }, 2000)
+      */
     }
 
     // @ts-ignore
 		google.script.run
       .withSuccessHandler(onSuccess)
       .withFailureHandler(this.handleError)
-      .insertAtCaret(generatedText)
+      .insertAtCaret(generatedText, false) // TODO: set highlight (true)
   }
 
   copyToClipboard = () => {
