@@ -27,6 +27,8 @@ const getLanguage = (): Language => {
 	}
 }
 
+const onInstall = () => onOpen()
+
 const onOpen = () => {
 	const lang = getLanguage()
 	const primaryLabel = i18n(lang, "primary_menu_item")
@@ -67,28 +69,67 @@ const generateLoremIpsum = (paragraphs = 1, length = "medium"): string => {
 	// https://loripsum.net/api/plaintext/2
 }
 
-const insertAtCaret = (text = "") => {
-	const cursor = DocumentApp
-		.getActiveDocument()
-		.getCursor()
+const insertAtCaret = (text: string, highlight = false) => {
+	let textElement: GoogleAppsScript.Document.Text
+	let textOffset = 0
 
+	const doc = DocumentApp.getActiveDocument()
+	const cursor = doc.getCursor()
+	
 	if ( cursor ) {
-		// Attempt to insert text at the cursor position. If the insertion returns null, the cursor"s
-		// containing element doesn"t allow insertions, so show the user an error message.
-		const textElement = cursor.insertText(text)
-		if ( !textElement ) {
-			throw new Error("error_no_insert")
-		}
+		textElement = cursor.insertText(text)
+		textOffset = cursor.getOffset()
 	} else {
-		throw new Error("error_no_caret")
+		const selection = doc.getSelection()
+		const rangeElements = selection.getRangeElements()
+    const targetElement = rangeElements[0].getElement().asText()
+    const startOffset = rangeElements[0].isPartial() ? rangeElements[0].getStartOffset() : 0
+		textOffset = startOffset
+
+		rangeElements.forEach((rangeElement) => {
+			const element = rangeElement.getElement()
+
+			if ( rangeElement.isPartial() ) {
+      	const s = rangeElement.getStartOffset()
+        const e = rangeElement.getEndOffsetInclusive()
+        
+        element.asText().deleteText(s, e)
+      } else {
+				element.removeFromParent()
+      }
+		})
+		
+		textElement = targetElement.insertText(startOffset, text)
 	}
+
+	// Attempt to insert text at the cursor position or after selection.
+	// If the insertion returns null, the containing element doesn't allow 
+	// insertions, so show the user an error message.
+	if ( !textElement ) {
+		throw new Error("error_no_insert")
+	}
+
+	const backgroundColor = textElement.getBackgroundColor() || "#ffffff"
+	
+	if ( highlight ) {
+		highlightText(textElement)
+	}
+	
+	return { text, textOffset, backgroundColor }
+}
+
+const highlightText = (textElement: GoogleAppsScript.Document.Text, color = "#ffff00") => {
+	textElement.setBackgroundColor(color)
+	return textElement
 }
 
 export {
+	onInstall,
 	onOpen,
 	openSidebar,
 	quickInsert,
 	generateLoremIpsum,
 	getLanguage,
-	insertAtCaret
+	insertAtCaret,
+	highlightText
 }
