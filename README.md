@@ -1,4 +1,4 @@
-![Gibberish Icon](https://gibberish.nedge.com/wp-content/uploads/sites/9/2020/10/lorem-ipsum-icon@2x.png)
+![Gibberish Icon](https://nilslockean.github.io/gibberish/gibberish-bs-icon-128.png)
 
 # Welcome to gibberish!
 
