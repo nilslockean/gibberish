@@ -8,7 +8,7 @@ This Privacy Policy applies only to our online activities and is valid for visit
 
 ## Consent
 
-By installing and using the Gibberish application, you hereby consent to our Privacy Policy and agree to its [terms](../TERMS).
+By installing and using the Gibberish application, you hereby consent to our Privacy Policy and agree to its [terms](./TERMS).
 
 ## Information we collect
 
