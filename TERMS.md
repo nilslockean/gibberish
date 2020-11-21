@@ -81,7 +81,7 @@ We shall not be hold responsible for any content that appears on your Website. Y
 
 ### **Your Privacy**
 
-Please read our [Privacy Policy](../GDPR).
+Please read our [Privacy Policy](./GDPR).
 
 ### **Reservation of Rights**
 
