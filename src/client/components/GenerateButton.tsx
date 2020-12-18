@@ -15,10 +15,11 @@ interface Props {
   onClick: () => void
   content: string
   generatingContent?: string
+  primary?: boolean
 }
 
 const GenerateButton = (props: Props) => {
-  const { status, content, generatingContent, onClick } = props
+  const { status, content, generatingContent, primary, onClick } = props
   const classes = useStyles()
   const isGenerating = status === GeneratorStatus.GENERATING
   const text = isGenerating && !!generatingContent ?
@@ -29,7 +30,7 @@ const GenerateButton = (props: Props) => {
     variant="contained"
     onClick={ onClick }
     disabled={ isGenerating }
-    color="primary"
+    color={ primary ? "secondary" : undefined }
     fullWidth
     className={ classes.root }
   >{ text }</Button>

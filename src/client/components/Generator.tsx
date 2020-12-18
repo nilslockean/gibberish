@@ -8,6 +8,7 @@ import MainSelect from "./MainSelect"
 import LinearProgress from "@material-ui/core/LinearProgress"
 import GenerateButton from "./GenerateButton"
 import MainTextArea from "./MainTextArea"
+import Button from '@material-ui/core/Button';
 
 export enum ParagraphLength {
   SHORT = "short",
@@ -243,11 +244,31 @@ export default class Main extends React.Component<Props, State> {
         onClick={ this.handleGenerateClick }
         content={ i18n("generate_btn_text") }
         generatingContent={ i18n("generate_btn_text_loading") }
+        primary={ !generatedText.length }
       />
 
       { status === Status.GENERATING && <LinearProgress /> }
 
       <MainTextArea label={ i18n("generated_text_header") } value={ generatedText } />
+
+      <Button
+        variant="contained"
+        // onClick={ () => console.log("CLick copy") }
+        // disabled={ isGenerating }
+        // color="secondary"
+        // className={ classes.root }
+      >{ i18n("copy_btn_text") }</Button>
+
+      <Button
+        variant="contained"
+        // onClick={ () => console.log("Insert") }
+        // disabled={ isGenerating }
+        color="primary"
+        // className={ classes.root }
+      >{ status === Status.INSERTING ?
+        i18n("insert_btn_text_loading") :
+        i18n("insert_btn_text")
+      }</Button>
 
       <div className="form-group" style={{ display: generatedText.length ? 'block' : 'none' }}>
         <label htmlFor="sampleTextArea">

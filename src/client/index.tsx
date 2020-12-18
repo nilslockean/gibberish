@@ -4,17 +4,13 @@ import Main from "./components/Main"
 import "./styles.scss"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import amber from '@material-ui/core/colors/amber';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      light: "80d4ce",
-      main: "#00a99d",
-      contrastText: "#fff"
-    },
-    secondary: {
-      main: "#1976d2"
-    }
+    primary: blue,
+    secondary: amber
   }
 });
 
